@@ -1,8 +1,6 @@
 package io.darrel.rsa
 
-import java.io.File
-
-private const val PRIME_FILE_LOCATION = "/Users/darrel/IdeaProjects/rsa/resources/primes.txt"
+import kotlin.random.Random
 
 tailrec fun gcd(x: Long, y: Long): Long = if (x == 0L) y
 else gcd(y % x, x)
@@ -16,16 +14,28 @@ fun eulerTotient(x: Long): Long {
 
 fun phi(x: Long) = eulerTotient(x)
 
-fun findAllPrimesToN(n: Long, writeToFile: Boolean = false): Set<Long> {
+fun findAllPrimesToN(n: Long): Set<Long> {
     val primes: MutableSet<Long> = mutableSetOf(2L)
     for (i in 2..n) {
         if (primes.filter { it * it <= i }.none { i % it == 0L }) primes.add(i)
     }
-    if(writeToFile)
-        writePrimesToFile(primes)
     return primes.toSet()
 }
 
-fun writePrimesToFile(primes: MutableSet<Long>, file: File = File(PRIME_FILE_LOCATION)) {
-    file.writeText(primes.joinToString(separator="\n"))
+fun obtainTwoPrimes(): Pair<Long, Long> {
+    val primes = findAllPrimesToN(10_000)
+    val primeList = primes.toList()
+    val random = Random.Default
+    val prime1 = primeList[random.nextInt(primeList.size)]
+    val prime2 = primeList[random.nextInt(primeList.size)]
+    return prime1 to prime2
+}
+
+fun generateKey() {
+    val (prime1, prime2) = obtainTwoPrimes()
+    val n = prime1 * prime2
+    val phiN = phi(n)
+    val e = (2..phiN).first { gcd(it, phiN) == 1L }
+    val d = (2..phiN).first { (it * e) % phiN == 1L }
+//    return KeyPair(n, e, d)
 }

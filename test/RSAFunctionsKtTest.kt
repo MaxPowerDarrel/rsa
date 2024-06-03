@@ -33,7 +33,7 @@ class RSAFunctionsKtTest {
 
     @Test
     fun testPrimeFinding() {
-        val primes = findAllPrimesToN(1000L, true)
+        val primes = findAllPrimesToN(1000L)
         assertEquals(168, primes.size)
     }
 }
