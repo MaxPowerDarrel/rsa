@@ -21,4 +21,13 @@ class RSAFunctionsKtTest {
         val decryptedMessage = decrypt(encryptedMessage, keyPair.second)
         assertEquals(message, decryptedMessage)
     }
+
+    @Test
+    fun encryptionStringTest() {
+        val keyPair = generateKeyPair()
+        val message = "Hi Darrel"
+        val encryptedMessage = encrypt(message, keyPair.first)
+        val decryptedMessage = decrypt(encryptedMessage, keyPair.second)
+        assertEquals(message, decryptedMessage)
+    }
 }
