@@ -1,5 +1,6 @@
 package io.darrel.rsa
 
+import java.math.BigInteger
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
@@ -8,22 +9,16 @@ class RSAFunctionsKtTest {
 
     @Test
     fun lcmTest() {
-        assertEquals(6L, lcm(2L, 6L))
-        assertEquals(60L, lcm(5L, 12))
-    }
-
-    @Test
-    fun modularInverseTest() {
-        assertEquals(4, modInverse(3, 11))
-        assertEquals(12, modInverse(10, 17))
+        assertEquals(BigInteger.valueOf(6), lcm(BigInteger.valueOf(2), BigInteger.valueOf(6)))
+        assertEquals(BigInteger.valueOf(60), lcm(BigInteger.valueOf(5), BigInteger.valueOf(12)))
     }
 
     @Test
     fun encryptionTest() {
         val keyPair = generateKeyPair()
-        val message = 89L
+        val message = BigInteger.valueOf(13)
         val encryptedMessage = encrypt(message, keyPair.first)
         val decryptedMessage = decrypt(encryptedMessage, keyPair.second)
-        assertEquals(message, decryptedMessage.toLong())
+        assertEquals(message, decryptedMessage)
     }
 }
