@@ -1,7 +1,1 @@
 product: jvm/app
-
-dependencies:
-  - org.junit.jupiter:junit-jupiter:5.10.2
-
-settings:
-  junit: junit-5
