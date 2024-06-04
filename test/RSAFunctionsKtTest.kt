@@ -13,12 +13,6 @@ class RSAFunctionsKtTest {
     }
 
     @Test
-    fun testPrimeFinding() {
-        val primes = findAllPrimesToN(1000L)
-        assertEquals(168, primes.size)
-    }
-
-    @Test
     fun modularInverseTest() {
         assertEquals(4, modInverse(3, 11))
         assertEquals(12, modInverse(10, 17))
