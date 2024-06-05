@@ -5,9 +5,8 @@ import java.util.*
 
 fun lcm(x: BigInteger, y: BigInteger): BigInteger = (x * y) / (x.gcd(y))
 
-fun obtainTwoPrimes(): Pair<BigInteger, BigInteger> {
+fun obtainTwoPrimes(bitLength: Int = 2048): Pair<BigInteger, BigInteger> {
     val random = Random(System.currentTimeMillis())
-    val bitLength = 2048
     val first = BigInteger.probablePrime(bitLength, random)
     var second = BigInteger.probablePrime(bitLength, random)
     while (first == second) {
